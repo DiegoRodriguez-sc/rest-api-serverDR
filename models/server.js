@@ -9,15 +9,16 @@ class Server{
     this.app = express();
     this.port = process.env.PORT || 8080;
     this.path ={
+      users:"/api/users"
       //path-e:"endpoint"
     };
 
     //base de datos
 
     //middlewares
-
+    this.middlewares();
     //rutas de mi app
-
+     this.routes();
 
    }
 
@@ -36,11 +37,13 @@ class Server{
 
 
    routes(){
-    // this.app.use(this.path.path-e, require("route"));
+     this.app.use(this.path.users, require("../routes/users"));
    }
 
    listen(){
-    this.app.listen(this.port);
+    this.app.listen(this.port, ()=>{
+      console.log("servidor corriendo en puerto",this.port);
+    });
    }
 
 }
