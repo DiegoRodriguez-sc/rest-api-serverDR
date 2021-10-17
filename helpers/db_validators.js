@@ -9,7 +9,16 @@ const emailExists = async(email = "") =>{
   }
 };
 
+//verify id in bd
+const idUserExists = async(id)=>{
+  const idUser = await User.findById(id);
+  if(!idUser){
+    throw new Error(`El id: ${id} no existe`);
+  }
+};
+
 
 module.exports={
- emailExists
+ emailExists,
+ idUserExists
 }
