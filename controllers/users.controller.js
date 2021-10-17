@@ -19,13 +19,7 @@ const postUser = async(req = request, res = response) =>{
 
   const {name, email, password} =   req.body;
   const user = new User({name, email, password});
-  //verify email
-  const existeEmail = await User.findOne({email});
-  if(existeEmail){
-    return res.status(400).json({
-        msg:"El correo electrónico ya existe"
-    })
-  }
+  
   //encrypt password
   const salt = bcryptjs.genSaltSync();
   user.password = bcryptjs.hashSync(password, salt);
