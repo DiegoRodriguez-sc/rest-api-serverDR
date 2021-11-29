@@ -7,7 +7,7 @@ const User = require("../models/user");
 
 const getUsers = async(req = request, res = response) => {
 
-  const query = {estado:true};
+  const query = {state:true};
   const users = await User.find(query);
   const todos = await User.countDocuments(query);
   res.json({
@@ -49,9 +49,14 @@ const putUser = async (req = request, res = response) => {
   });
 };
 
-const deleteUser = (req = request, res = response) => {
+const deleteUser = async(req = request, res = response) => {
+
+  const {id} = req.params;
+  const user = await User.findByIdAndUpdate(id, {state:false});
+
   res.json({
-    msg: "delete user",
+    msg: "usuario borrado",
+    user
   });
 };
 
