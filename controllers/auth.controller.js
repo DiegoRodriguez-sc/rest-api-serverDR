@@ -3,51 +3,78 @@ const bcryptjs = require("bcryptjs");
 const User = require("../models/user");
 const { generarJWT } = require("../helpers/generarJWT");
 
-const login = async(req = request, res = response) => {
-
-  const {email, password} = req.body;
+//login user
+const login = async (req = request, res = response) => {
+  const { email, password } = req.body;
 
   try {
-    
-    const user = await User.findOne({email});
-    if(!user){
+    const user = await User.findOne({ email });
+    if (!user) {
       return res.status(400).json({
-         msg:"Usuario/contraseña incorrectos"
+        msg: "Usuario/contraseña incorrectos",
       });
     }
 
-    if(user.state === false ){
+    if (user.state === false) {
       return res.status(400).json({
-         msg:"Usuario/contraseña incorrectos"
-      })
+        msg: "Usuario/contraseña incorrectos",
+      });
     }
-  
+
     const validPassword = bcryptjs.compareSync(password, user.password);
-    if(!validPassword){
+    if (!validPassword) {
       return res.status(400).json({
-        msg:"Usuario/contraseña incorrectos"
+        msg: "Usuario/contraseña incorrectos",
       });
     }
 
     const token = await generarJWT(user.id);
-    
+
     res.status(200).json({
-      msg:"login ok",
-      data:{token,user}
-    })
-
-
-
+      msg: "login ok",
+      data: { token, user },
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-       msg:"Hable con el administrador"
-    }) 
+      msg: "Hable con el administrador",
+    });
   }
+};
 
-}
+//register user
+const register = async (req = request, res = response) => {
+  const { name, email, password } = req.body;
 
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({
+        msg: "Usuario ya existe",
+      });
+    }
 
-module.exports ={
- login
-}
+    const NewUser = new User({ name, email, password });
+
+    //encrypt password
+    const salt = bcryptjs.genSaltSync();
+    NewUser.password = bcryptjs.hashSync(password, salt);
+
+    const token = await generarJWT(NewUser.id);
+
+    res.status(200).json({
+      msg: "Usuario creado",
+      data: { token, NewUser },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: "Hable con el administrador",
+    });
+  }
+};
+
+module.exports = {
+  login,
+  register,
+};
