@@ -31,6 +31,7 @@ router.post(
       "password",
       "La contraseña tiene que tener 5 caracteres como minimo"
     ).isLength({ min: 5 }),
+    check("rol","No es un rol válido").isIn("ADMIN_ROL","USER_ROLE"),
     validateData,
   ],
   postUser

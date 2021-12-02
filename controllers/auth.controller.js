@@ -61,7 +61,8 @@ const register = async (req = request, res = response) => {
     NewUser.password = bcryptjs.hashSync(password, salt);
 
     const token = await generarJWT(NewUser.id);
-
+   
+    await NewUser.save();
     res.status(200).json({
       msg: "Usuario creado",
       data: { token, NewUser },
