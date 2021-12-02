@@ -8,8 +8,9 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || 8080;
     this.path = {
-      users: "/api/users",
       auth: "/api/auth",
+      categories: "/api/categories",
+      users: "/api/users",
     };
 
     //base de datos
@@ -37,6 +38,7 @@ class Server {
 
   routes() {
     this.app.use(this.path.auth, require("../routes/auth"));
+    this.app.use(this.path.categories, require("../routes/categories"));
     this.app.use(this.path.users, require("../routes/users"));
   }
 
