@@ -8,6 +8,7 @@ const {
   putCategories,
   deleteCategories,
 } = require("../controllers/categories.controller");
+const { idCategorieExists } = require("../helpers/db_validators");
 const { validateData } = require("../middlewares/validateData");
 const { validateJwt } = require("../middlewares/validateJwt");
 const { validateRol } = require("../middlewares/validateRol");
@@ -25,8 +26,18 @@ router.post("/", [
   validateData
 ], postCategories);
 
-router.put("/:id", putCategories);
+router.put("/:id", [
+  validateJwt,
+  validateRol,
+  check("id","No es un ID válido").isMongoId(),
+  check("id").custom(idCategorieExists),
+  validateData
+], putCategories);
 
-router.delete("/:id", deleteCategories);
+router.delete("/:id", [
+  validateJwt,
+  validateRol,
+  validateData
+], deleteCategories);
 
 module.exports = router;

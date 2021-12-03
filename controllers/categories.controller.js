@@ -1,11 +1,18 @@
 const { request, response } = require("express");
 const Categorie = require("../models/categorie");
 
-const getCategories = (req = request, res = response) => {
+const getCategories = async(req = request, res = response) => {
+
+  const query = {state:true};
+  const categories = await Categorie.find(query);
+  const todos = await Categorie.countDocuments(query);
+
   res.status(200).json({
-    msg: "get categorias",
+    todos,
+    data:categories
   });
 };
+
 const getCategoriesID = (req = request, res = response) => {
   const { id } = req.params;
 
@@ -14,6 +21,7 @@ const getCategoriesID = (req = request, res = response) => {
     id,
   });
 };
+
 const postCategories = async (req = request, res = response) => {
   const name = req.body.name.toUpperCase();
 
@@ -38,16 +46,18 @@ const postCategories = async (req = request, res = response) => {
     category,
   });
 };
-const putCategories = (req = request, res = response) => {
-  const category = req.body;
-  const { id } = req.params;
+
+const putCategories = async(req = request, res = response) => {
+  const name = req.body.name.toUpperCase();
+  const {id} = req.params;
+  const categorie = await Categorie.findByIdAndUpdate(id, {name});
 
   res.status(201).json({
-    msg: "put categorias",
-    id,
-    category,
+    msg: "Categoria actualizada",
+    categorie
   });
 };
+
 const deleteCategories = (req = request, res = response) => {
   const { id } = req.params;
 
