@@ -37,6 +37,8 @@ router.put("/:id", [
 router.delete("/:id", [
   validateJwt,
   validateRol,
+  check("id","No es un ID válido").isMongoId(),
+  check("id").custom(idCategorieExists),
   validateData
 ], deleteCategories);
 
