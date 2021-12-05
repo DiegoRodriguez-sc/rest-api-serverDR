@@ -4,3 +4,5 @@
  * categories
  * activities
  * news
+ * contact
+ * members

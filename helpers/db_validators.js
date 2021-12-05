@@ -1,54 +1,62 @@
 const Activitie = require("../models/activitie");
 const Categorie = require("../models/categorie");
+const Contact = require("../models/contact");
 const New = require("../models/new");
 const User = require("../models/user");
 
-
 //verify user email
-const emailExists = async(email = "") =>{
-  const mail = await User.findOne({email});
-  if(mail){
+const emailExists = async (email = "") => {
+  const mail = await User.findOne({ email });
+  if (mail) {
     throw new Error(`El correo: ${email} ya esta registrado`);
   }
 };
 
 //verify user id in bd
-const idUserExists = async(id)=>{
+const idUserExists = async (id) => {
   const idUser = await User.findById(id);
-  if(!idUser){
+  if (!idUser) {
     throw new Error(`El id: ${id} no existe`);
   }
 };
 
-//verify category id 
-const idCategorieExists = async(id)=>{
+//verify category id
+const idCategorieExists = async (id) => {
   const idCategorie = await Categorie.findById(id);
-  if(!idCategorie){
+  if (!idCategorie) {
     throw new Error(`El id: ${id} no existe`);
   }
 };
 
-//verify activity id 
-const idActivityExists = async(id)=>{
+//verify activity id
+const idActivityExists = async (id) => {
   const idActivity = await Activitie.findById(id);
-  if(!idActivity){
+  if (!idActivity) {
     throw new Error(`El id: ${id} no existe`);
   }
 };
 
-//verify new id 
-const idNewExists = async(id)=>{
+//verify new id
+const idNewExists = async (id) => {
   const idNew = await New.findById(id);
-  if(!idNew){
+  if (!idNew) {
     throw new Error(`El id: ${id} no existe`);
   }
 };
 
+//verify contact id
+const idContactExists = async (id) => {
+  const idContact = await Contact.findById(id);
+  if (!idContact) {
+    throw new Error(`El id: ${id} no existe`);
+  }
+};
 
-module.exports={
- emailExists,
- idUserExists,
- idCategorieExists,
- idActivityExists,
- idNewExists
-}
+module.exports = {
+  emailExists,
+  idUserExists,
+  idCategorieExists,
+  idActivityExists,
+  idNewExists,
+  idContactExists,
+};

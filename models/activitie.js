@@ -5,7 +5,7 @@ const ActivitieSchema = Schema({
     type: String,
     required: [true, "El título es obligatorio"]
   },
-  estado: {
+  state: {
     type: Boolean,
     default: true,
     required: true,
