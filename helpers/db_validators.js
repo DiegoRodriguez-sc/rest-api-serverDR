@@ -1,6 +1,7 @@
 const Activitie = require("../models/activitie");
 const Categorie = require("../models/categorie");
 const Contact = require("../models/contact");
+const Member = require("../models/member");
 const New = require("../models/new");
 const User = require("../models/user");
 
@@ -52,6 +53,14 @@ const idContactExists = async (id) => {
   }
 };
 
+//verify contact id
+const idMemberExists = async (id) => {
+  const idMember = await Member.findById(id);
+  if (!idMember) {
+    throw new Error(`El id: ${id} no existe`);
+  }
+};
+
 module.exports = {
   emailExists,
   idUserExists,
@@ -59,4 +68,5 @@ module.exports = {
   idActivityExists,
   idNewExists,
   idContactExists,
+  idMemberExists
 };

@@ -13,6 +13,7 @@ class Server {
       categories: "/api/categories",
       contact:    "/api/contact",
       news:       "/api/news",
+      members:    "/api/members",
       users:      "/api/users",
     };
 
@@ -44,6 +45,7 @@ class Server {
     this.app.use(this.path.activities, require("../routes/activities"));
     this.app.use(this.path.categories, require("../routes/categories"));
     this.app.use(this.path.contact,    require("../routes/contact"));
+    this.app.use(this.path.members,    require("../routes/members"));
     this.app.use(this.path.news,       require("../routes/news"));
     this.app.use(this.path.users,      require("../routes/users"));
   }
