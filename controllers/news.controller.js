@@ -1,76 +1,70 @@
 const { request, response } = require("express");
-const Activitie = require("../models/activitie");
+const New = require("../models/new");
 
-// const getActivities = async (req = request, res = response) => {
-//   const query = { state: true };
-//   const activities = await Activitie.find(query)
-//     .populate("user", "name")
-//     .populate("category", "name");
-//   const todos = await Activitie.countDocuments(query);
+const getNews = async (req = request, res = response) => {
+  const query = { state: true };
+  const news = await New.find(query).populate("user", "name");
+  const todos = await New.countDocuments(query);
 
-//   res.status(200).json({
-//     todos,
-//     data: activities,
-//   });
-// };
+  res.status(200).json({
+    todos,
+    data: news,
+  });
+};
 
-// const getActivitiesID = (req = request, res = response) => {
-//   res.status(200).json({
-//     msg: "get actividades por id",
-//   });
-// };
+const getNewsID = (req = request, res = response) => {
+  res.status(200).json({
+    msg: "get actividades por id",
+  });
+};
 
-// const postActivities = async (req = request, res = response) => {
-//   const { title, description, img, category } = req.body;
+const postNews = async (req = request, res = response) => {
+  const { title, description, img } = req.body;
 
-//   const data = {
-//     title,
-//     description,
-//     img,
-//     category,
-//     user: req.user._id,
-//   };
+  const data = {
+    title,
+    description,
+    img,
+    user: req.user._id,
+  };
 
-//   const activity = new Activitie(data);
-//   await activity.save();
+  const news = new New(data);
+  await news.save();
 
-//   res.status(201).json({
-//     msg: "Actividad creada",
-//     activity,
-//   });
-// };
+  res.status(201).json({
+    msg: "Actividad creada",
+    news,
+  });
+};
 
-// const putActivities = async (req = request, res = response) => {
-//   const newActivity = req.body;
-//   const { id } = req.params;
-//   const activity = await Activitie.findByIdAndUpdate(id, newActivity, {
-//     new: true,
-//   });
+const putNews = async (req = request, res = response) => {
+  const newNew = req.body;
+  const { id } = req.params;
+  const news = await New.findByIdAndUpdate(id, newNew, {
+    new: true,
+  });
 
-//   res.status(201).json({
-//     msg: "Actividad actualizada",
-//     activity,
-//   });
-// };
+  res.status(201).json({
+    msg: "Novedad actualizada",
+    news,
+  });
+};
 
-// const deleteActivities = async(req = request, res = response) => {
-//   const { id } = req.params;
-//   const activity = await Activitie.findByIdAndUpdate(
-//     id,
-//     { state: false },
-//     { new: true }
-//   );
+const deleteNews = async (req = request, res = response) => {
+  const { id } = req.params;
+  const news = await New.findByIdAndUpdate(id, { state: false }, { new: true });
 
-//   res.status(200).json({
-//     msg: "Actividad borrada",
-//     activity,
-//   });
-// };
+  res.status(200).json({
+    msg: "Novedad borrada",
+    news,
+  });
+};
 
 module.exports = {
-  // getActivities,
-  // getActivitiesID,
-  // postActivities,
-  // putActivities,
-  // deleteActivities,
+  getNews,
+  getNewsID,
+  postNews,
+  putNews,
+  deleteNews,
+  getNews,
 };

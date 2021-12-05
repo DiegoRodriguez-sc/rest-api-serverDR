@@ -1,5 +1,6 @@
 const Activitie = require("../models/activitie");
 const Categorie = require("../models/categorie");
+const New = require("../models/new");
 const User = require("../models/user");
 
 
@@ -35,10 +36,19 @@ const idActivityExists = async(id)=>{
   }
 };
 
+//verify new id 
+const idNewExists = async(id)=>{
+  const idNew = await New.findById(id);
+  if(!idNew){
+    throw new Error(`El id: ${id} no existe`);
+  }
+};
+
 
 module.exports={
  emailExists,
  idUserExists,
  idCategorieExists,
- idActivityExists
+ idActivityExists,
+ idNewExists
 }
