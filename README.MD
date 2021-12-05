@@ -1,3 +1,6 @@
 # ApiRest - En progreso 
- * users
  * login/register
+ * users
+ * categories
+ * activities
+ * news
