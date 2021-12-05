@@ -17,7 +17,7 @@ const CategorieSchema = Schema({
 });
 
 CategorieSchema.methods.toJSON = function() {
-  const { __v, _id, ...categoria  } = this.toObject();
+  const { __v, _id, state, ...categoria  } = this.toObject();
   categoria.uid = _id;
   return categoria;
 }

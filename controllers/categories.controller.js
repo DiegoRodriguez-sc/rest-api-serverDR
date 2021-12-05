@@ -49,7 +49,11 @@ const postCategories = async (req = request, res = response) => {
 const putCategories = async (req = request, res = response) => {
   const name = req.body.name.toUpperCase();
   const { id } = req.params;
-  const categorie = await Categorie.findByIdAndUpdate(id, { name });
+  const categorie = await Categorie.findByIdAndUpdate(
+    id,
+    { name },
+    { new: true }
+  );
 
   res.status(201).json({
     msg: "Categoria actualizada",
@@ -57,9 +61,13 @@ const putCategories = async (req = request, res = response) => {
   });
 };
 
-const deleteCategories = async(req = request, res = response) => {
+const deleteCategories = async (req = request, res = response) => {
   const { id } = req.params;
-  const category = await Categorie.findByIdAndUpdate(id, { state: false });
+  const category = await Categorie.findByIdAndUpdate(
+    id,
+    { state: false },
+    { new: true }
+  );
 
   res.status(200).json({
     msg: "Categoria borrado",
