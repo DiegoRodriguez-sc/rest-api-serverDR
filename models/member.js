@@ -17,8 +17,8 @@ const MemberSchema = Schema({
   },
   description: { type: String },
   img: { type: String, default:null },
-  urlFb:{type: String, required},
-  urlLk:{type: String, required}
+  urlFb:{type: String, required: true},
+  urlLk:{type: String, required : true}
 });
 
 MemberSchema.methods.toJSON = function () {

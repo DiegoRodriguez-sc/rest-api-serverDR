@@ -6,3 +6,4 @@
  * news
  * contact
  * members
+ * organization

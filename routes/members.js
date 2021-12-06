@@ -30,7 +30,7 @@ router.put(
     validateJwt,
     validateRol,
     check("id", "No es un ID válido").isMongoId(),
-    check("id").custom(idNewExists),
+    check("id").custom(idMemberExists),
     validateData,
   ],
   putMember
