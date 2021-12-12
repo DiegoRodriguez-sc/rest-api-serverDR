@@ -75,7 +75,21 @@ const register = async (req = request, res = response) => {
   }
 };
 
+//revalidation token
+const revalidarTWJ = async (req = request, res = response) => {
+  const { uid, name } = req.user;
+  // generar un nuevo token
+  const token = await generarJWT(uid);
+ 
+  res.json({
+    msg:"token revalidado",
+    data:{token, user:req.user}
+  });
+};
+
+
 module.exports = {
   login,
   register,
+  revalidarTWJ
 };
