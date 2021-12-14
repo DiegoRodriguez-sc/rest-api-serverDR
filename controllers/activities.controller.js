@@ -33,10 +33,16 @@ const postActivities = async (req = request, res = response) => {
 
   const activity = new Activitie(data);
   await activity.save();
+  console.log(activity._id);
+  const newActivity = await Activitie.findById(activity._id)
+    .populate("user", "name")
+    .populate("category", "name");
+
+  console.log(newActivity);
 
   res.status(201).json({
     msg: "Actividad creada",
-    activity,
+    activity: newActivity,
   });
 };
 

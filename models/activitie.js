@@ -3,7 +3,8 @@ const { Schema, model } = require("mongoose");
 const ActivitieSchema = Schema({
   title: {
     type: String,
-    required: [true, "El título es obligatorio"]
+    required: [true, "El título es obligatorio"],
+    unique:false,
   },
   state: {
     type: Boolean,
