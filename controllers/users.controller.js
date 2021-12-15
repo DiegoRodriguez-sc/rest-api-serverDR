@@ -18,8 +18,8 @@ const getUsers = async(req = request, res = response) => {
 
 const postUser = async (req = request, res = response) => {
   //TODO: añadir el rol
-  const { name, email, password } = req.body;
-  const user = new User({ name, email, password });
+  const { name, email, password, role } = req.body;
+  const user = new User({ name, email, password, role });
 
   //encrypt password
   const salt = bcryptjs.genSaltSync();
