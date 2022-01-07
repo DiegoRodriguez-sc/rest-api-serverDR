@@ -1,12 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const {
-  getProducts,
-  getProductId,
-  postProduct,
-  putProduct,
-  deleteProduct,
-} = require("../controller/products.controller");
+const { getProducts, getProductId, postProduct, putProduct, deleteProduct } = require("../controllers/products.controller");
+
 const { idProductExists } = require("../helpers/db_validators");
 
 const { validateData } = require("../middlewares/validateData");
