@@ -3,7 +3,8 @@ const product = require("./product");
 
 const OrderSchema = Schema({
   order: {
-    type: [product],
+    type: [Schema.Types.ObjectId],
+    ref: "Product"
   },
   user: {
     type: Schema.Types.ObjectId,
