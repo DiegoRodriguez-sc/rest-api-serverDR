@@ -1,9 +1,5 @@
-# ApiRest - En progreso 
+# ApiRest  
  * login/register
  * users
- * categories
- * activities
- * news
- * contact
- * members
- * organization
+ * products
+ * orders
