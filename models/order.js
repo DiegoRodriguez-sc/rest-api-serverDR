@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 const product = require("./product");
 
 const OrderSchema = Schema({
-  order: {
-    type: [Schema.Types.ObjectId],
+  list: [{
+    type: Schema.Types.ObjectId,
     ref: "Product"
-  },
+  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -19,6 +19,10 @@ const OrderSchema = Schema({
     type: Date,
     default: Date.now,
   },
+  total:{
+    type:Number,
+    default:0
+  }
 });
 
 OrderSchema.methods.toJSON = function () {
